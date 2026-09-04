@@ -46,12 +46,12 @@ void tft180_show_rgb565_image(uint16_t x, uint16_t y, const uint16_t *image,
                              uint16_t dis_width, uint16_t dis_height, 
                              uint8_t color_mode);
 
-// 顶部文本显示桩函数（最简空实现，彻底避免乱码和字库依赖）
-static inline void tft180_show_char(uint16_t x, uint16_t y, const char dat) { (void)x; (void)y; (void)dat; }
-static inline void tft180_show_string(uint16_t x, uint16_t y, const char dat[]) { (void)x; (void)y; (void)dat; }
-static inline void tft180_show_int(uint16_t x, uint16_t y, const int32_t dat, uint8_t num) { (void)x; (void)y; (void)dat; (void)num; }
-static inline void tft180_show_uint(uint16_t x, uint16_t y, const uint32_t dat, uint8_t num) { (void)x; (void)y; (void)dat; (void)num; }
-static inline void tft180_show_float(uint16_t x, uint16_t y, const double dat, uint8_t num, uint8_t pointnum) { (void)x; (void)y; (void)dat; (void)num; (void)pointnum; }
+// 文本与字符显示 API
+void tft180_show_char(uint16_t x, uint16_t y, const char dat);
+void tft180_show_string(uint16_t x, uint16_t y, const char dat[]);
+void tft180_show_int(uint16_t x, uint16_t y, const int32_t dat, uint8_t num);
+void tft180_show_uint(uint16_t x, uint16_t y, const uint32_t dat, uint8_t num);
+void tft180_show_float(uint16_t x, uint16_t y, const double dat, uint8_t num, uint8_t pointnum);
 static inline void tft180_show_chinese(uint16_t x, uint16_t y, uint8_t size, const uint8_t *buf, uint8_t num, const uint16_t color) { (void)x; (void)y; (void)size; (void)buf; (void)num; (void)color; }
 
 // 性能与窗口工具函数

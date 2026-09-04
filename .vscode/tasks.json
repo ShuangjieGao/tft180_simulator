@@ -14,6 +14,7 @@
                 "${workspaceFolder}/main.c",
                 "${workspaceFolder}/image.c",
                 "${workspaceFolder}/zf_device_tft180.c",
+                "${workspaceFolder}/zf_common_font.c",
                 "${workspaceFolder}/zf_common_function.c",
                 "${workspaceFolder}/avilib.c",
                 "${workspaceFolder}/read_bmp.c",

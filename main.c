@@ -96,6 +96,7 @@ int main(void) {
             }
         }
 
+
         // 触发算法处理并刷新窗口
         mt9v03x_finish_flag = 1;
         image_main();

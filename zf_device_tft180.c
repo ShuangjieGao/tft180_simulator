@@ -366,6 +366,67 @@ void tft180_delay(uint32_t ms) {
     }
 }
 
+void tft180_show_char(uint16_t x, uint16_t y, const char dat) {
+    uint8_t ch = (uint8_t)dat;
+    if (ch < 32 || ch > 126) ch = ' ';
+    uint16_t index = ch - 32;
+
+    for (uint8_t col = 0; col < 8; col++) {
+        uint8_t byte_up = ascii_font_8x16[index][col];
+        uint8_t byte_down = ascii_font_8x16[index][col + 8];
+
+        for (uint8_t row = 0; row < 8; row++) {
+            uint16_t color = ((byte_up >> row) & 0x01) ? s_tft.pen : s_tft.bg;
+            tft180_draw_point(x + col, y + row, color);
+        }
+
+        for (uint8_t row = 0; row < 8; row++) {
+            uint16_t color = ((byte_down >> row) & 0x01) ? s_tft.pen : s_tft.bg;
+            tft180_draw_point(x + col, y + 8 + row, color);
+        }
+    }
+}
+
+void tft180_show_string(uint16_t x, uint16_t y, const char dat[]) {
+    if (!dat) return;
+    uint16_t cur_x = x;
+    uint16_t cur_y = y;
+    while (*dat) {
+        if (*dat == '\n') {
+            cur_y += 16;
+            cur_x = x;
+        } else {
+            tft180_show_char(cur_x, cur_y, *dat);
+            cur_x += 8;
+        }
+        dat++;
+    }
+}
+
+void tft180_show_int(uint16_t x, uint16_t y, const int32_t dat, uint8_t num) {
+    char buf[32];
+    char fmt[16];
+    snprintf(fmt, sizeof(fmt), "%%%dd", num);
+    snprintf(buf, sizeof(buf), fmt, dat);
+    tft180_show_string(x, y, buf);
+}
+
+void tft180_show_uint(uint16_t x, uint16_t y, const uint32_t dat, uint8_t num) {
+    char buf[32];
+    char fmt[16];
+    snprintf(fmt, sizeof(fmt), "%%%du", num);
+    snprintf(buf, sizeof(buf), fmt, dat);
+    tft180_show_string(x, y, buf);
+}
+
+void tft180_show_float(uint16_t x, uint16_t y, const double dat, uint8_t num, uint8_t pointnum) {
+    char buf[32];
+    char fmt[16];
+    snprintf(fmt, sizeof(fmt), "%%%d.%df", num, pointnum);
+    snprintf(buf, sizeof(buf), fmt, dat);
+    tft180_show_string(x, y, buf);
+}
+
 void tft180_performance_test(void) {
     tft180_clear();
     tft180_draw_line(0, 0, TFT180_W - 1, TFT180_H - 1, RGB565_GREEN);
