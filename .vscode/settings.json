@@ -1,0 +1,24 @@
+{
+    "files.associations": {
+        "sdl.h": "c",
+        "stdio.h": "c",
+        "sdl_main.h": "c",
+        "stdint.h": "c",
+        "image.h": "c",
+        "stdint-gcc.h": "c",
+        "tft180.h": "c",
+        "pit_demo.h": "c",
+        "my_stdint.h": "c",
+        "zf_device_tft180.h": "c",
+        "zf_common_font.h": "c",
+        "stdlib.h": "c",
+        "zf_common_function.h": "c",
+        "curl.h": "c",
+        "windows.h": "c",
+        "math.h": "c",
+        "time.h": "c"
+    },
+    "chat.sendElementsToChat.attachCSS": false,
+    "chat.sendElementsToChat.enabled": false,
+    "workbench.browser.sendElementsToChat.attachImages": false
+}

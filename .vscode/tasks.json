@@ -1,0 +1,42 @@
+﻿{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "C/C++: 构建原生 TFT180 模拟器 (main.exe)",
+            "command": "C:/Program Files/OpenMV IDE/share/qtcreator/stedgeai/Utilities/windows/mingw64/bin/gcc.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "-O2",
+                "-I${workspaceFolder}",
+                "-Dsimulator",
+                "-Wno-misleading-indentation",
+                "${workspaceFolder}/main.c",
+                "${workspaceFolder}/image.c",
+                "${workspaceFolder}/zf_device_tft180.c",
+                "${workspaceFolder}/zf_common_function.c",
+                "${workspaceFolder}/avilib.c",
+                "${workspaceFolder}/read_bmp.c",
+                "-o",
+                "${workspaceFolder}/main.exe",
+                "-lgdi32",
+                "-luser32"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "PATH": "C:\\Program Files\\OpenMV IDE\\share\\qtcreator\\stedgeai\\Utilities\\windows\\mingw64\\bin;${env:PATH}"
+                }
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "编译器 MinGW-w64 GCC (生成 main.exe，极简原生 Win32 GDI GUI)"
+        }
+    ],
+    "version": "2.0.0"
+}
