@@ -1,9 +1,9 @@
-﻿{
+{
     "tasks": [
         {
             "type": "shell",
             "label": "C/C++: 构建原生 TFT180 模拟器 (main.exe)",
-            "command": "C:/Program Files/OpenMV IDE/share/qtcreator/stedgeai/Utilities/windows/mingw64/bin/gcc.exe",
+            "command": "${workspaceFolder}/compiler/bin/gcc.exe",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
@@ -25,7 +25,7 @@
             "options": {
                 "cwd": "${workspaceFolder}",
                 "env": {
-                    "PATH": "C:\\Program Files\\OpenMV IDE\\share\\qtcreator\\stedgeai\\Utilities\\windows\\mingw64\\bin;${env:PATH}"
+                    "PATH": "${workspaceFolder}\\compiler\\bin;${env:PATH}"
                 }
             },
             "problemMatcher": [

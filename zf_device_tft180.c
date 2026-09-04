@@ -1,4 +1,4 @@
-﻿#include "zf_device_tft180.h"
+#include "zf_device_tft180.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,9 +30,21 @@ static HANDLE s_hThread = NULL;
 static CRITICAL_SECTION s_cs;
 static volatile int s_window_ready = 0;
 static volatile int s_window_closed = 0;
+static volatile int s_is_paused = 0;
 
 int tft180_is_closed(void) {
     return s_window_closed;
+}
+
+int tft180_is_paused(void) {
+    return s_is_paused;
+}
+
+void tft180_set_pause(int pause) {
+    s_is_paused = pause;
+    if (s_hwnd && IsWindow(s_hwnd)) {
+        SetWindowTextA(s_hwnd, s_is_paused ? "TFT180 [PAUSED]" : "TFT180");
+    }
 }
 
 static inline uint32_t rgb565_to_rgb888(uint16_t color) {
@@ -79,6 +91,9 @@ static LRESULT CALLBACK TFT180_WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPAR
             if (wParam == VK_ESCAPE) {
                 s_window_closed = 1;
                 PostQuitMessage(0);
+            } else if (wParam == VK_SPACE) {
+                s_is_paused = !s_is_paused;
+                SetWindowTextA(hwnd, s_is_paused ? "TFT180 [PAUSED]" : "TFT180");
             }
             return 0;
 
@@ -346,6 +361,9 @@ void tft180_flush(void) {
 
 void tft180_delay(uint32_t ms) {
     Sleep(ms);
+    while (s_is_paused && !s_window_closed) {
+        Sleep(20);
+    }
 }
 
 void tft180_performance_test(void) {

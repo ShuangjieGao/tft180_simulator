@@ -1,4 +1,4 @@
-﻿#ifndef _ZF_DEVICE_TFT180_H_
+#ifndef _ZF_DEVICE_TFT180_H_
 #define _ZF_DEVICE_TFT180_H_
 
 #include <stdint.h>
@@ -58,6 +58,8 @@ static inline void tft180_show_chinese(uint16_t x, uint16_t y, uint8_t size, con
 void tft180_flush(void);
 void tft180_delay(uint32_t ms);
 int  tft180_is_closed(void);
+int  tft180_is_paused(void);
+void tft180_set_pause(int pause);
 void tft180_performance_test(void);
 
 #endif
